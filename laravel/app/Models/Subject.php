@@ -23,3 +23,5 @@ class Subject extends Model
         'alive'
     ];
 }
+
+

@@ -2,35 +2,39 @@
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
-scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+scalar DateTime
+  @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
-    users: [User!]! @paginate(defaultCount: 10) @guard
-    user(id: ID @eq): User @find @guard
-    subjects(orderBy: _ @orderBy(columns: ["created_at"])): [Subject!]! @all
-    subject(id: ID @eq): Subject @find
-    me: User @auth
+  users: [User!]! @paginate(defaultCount: 10) @guard
+  user(id: ID @eq): User @find @guard
+  subjects(
+    orderBy: _
+      @orderBy(columns: ["created_at", "date_of_birth", "test_chamber"])
+  ): [Subject!]! @all @guard
+  subject(id: ID @eq): Subject @find @guard
+  me: User @auth
 }
 
 type Mutation {
-    deleteSubject(id: ID!): Subject @delete
+  deleteSubject(id: ID!): Subject @delete
 }
 
 type User {
-    id: ID!
-    name: String!
-    email: String!
-    created_at: DateTime!
-    updated_at: DateTime!
+  id: ID!
+  name: String!
+  email: String!
+  created_at: DateTime!
+  updated_at: DateTime!
 }
 
 type Subject {
-    id: ID!
-    name: String!
-    date_of_birth: DateTime!
-    test_chamber: Int!
-    score: Int!
-    alive: Boolean!
-    created_at: DateTime!
-    updated_at: DateTime!
+  id: ID!
+  name: String!
+  date_of_birth: DateTime!
+  test_chamber: Int!
+  score: Int!
+  alive: Boolean!
+  created_at: DateTime!
+  updated_at: DateTime!
 }

@@ -22,4 +22,16 @@ class ModelTest extends TestCase
         $this->assertInstanceOf(Subject::class, $subject);
         $this->assertInstanceOf(User::class, $user);
     }
+
+    /**
+     * A basic unit test examples
+     * 
+     * @return void
+     */
+
+     public function test_hello_world() {
+         $response = $this->get('/');
+
+         $response->assertStatus(200);
+     }
 }
